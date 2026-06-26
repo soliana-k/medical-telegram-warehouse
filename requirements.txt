@@ -2,7 +2,6 @@ telethon
 pandas
 psycopg2-binary
 sqlalchemy
-dbt-postgre
 ultralytics
 opencv-python-headless
 fastapi
@@ -11,3 +10,5 @@ pydantic
 dagster
 dagster-webserver
 python-dotenv
+jupyter
+ipykernel
