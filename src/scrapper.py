@@ -146,7 +146,7 @@ class TelegramScraper:
 if __name__ == '__main__':
     MY_API_ID = os.getenv('API_ID')               
     MY_API_HASH = os.getenv('API_HASH')
-    TARGETS_LIST = ['CheMed123', 'lobelia4cosmetics']
+    TARGETS_LIST = ['tikvahpharma', 'HakimApps_Guideline', 'CheMed123', 'lobelia4cosmetics']
     
     scraper = TelegramScraper(api_id=MY_API_ID, api_hash=MY_API_HASH, request_delay=1.0)
     
