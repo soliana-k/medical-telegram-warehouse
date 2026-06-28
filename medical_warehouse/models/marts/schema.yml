@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: dim_channels
+    description: "Profiles and historical aggregated performance metrics for tracked Telegram channels."
+    columns:
+      - name: channel_key
+        description: "Primary Key generated using MD5 logic mapping."
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_dates
+    description: "Conformed temporal calendar dates lookup reference table."
+    columns:
+      - name: date_key
+        description: "Primary key in integer YYYYMMDD syntax layout format."
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_messages
+    description: "Central facts log containing performance metrics evaluated per message."
+    columns:
+      - name: message_id
+        description: "Unique system event message index number identifier."
+        tests:
+          - unique
+          - not_null
+      - name: channel_key
+        description: "Foreign key verifying connection link directly down to dim_channels dimension."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_channels')
+                field: channel_key
+      - name: date_key
+        description: "Foreign key verifying connection link directly down to dim_dates dimension."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_dates')
+                field: date_key

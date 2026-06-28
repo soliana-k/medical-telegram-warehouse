@@ -12,3 +12,4 @@ dagster-webserver
 python-dotenv
 jupyter
 ipykernel
+dbt-postgres
