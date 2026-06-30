@@ -6,5 +6,5 @@ logs/
 *.log
 venv/
 *.session
-*.pyc
 *.pt
+*.pyc
