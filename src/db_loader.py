@@ -83,6 +83,39 @@ def main():
     cur.close()
     conn.close()
     print("Successfully populated raw.telegram_messages table!")
+def load_yolo_csv_to_postgres():
+    csv_path = "data/yolo_detection_results.csv"
+    df = pd.read_csv(csv_path)
+    
+    conn = psycopg2.connect(**DB_PARAMS)
+    cur = conn.cursor()
+    
+    cur.execute("CREATE SCHEMA IF NOT EXISTS raw;")
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS raw.yolo_detections (
+            message_id BIGINT,
+            channel_name VARCHAR(255),
+            detected_objects TEXT,
+            confidence_score NUMERIC,
+            image_category VARCHAR(100),
+            image_path TEXT
+        );
+    """)
+    
+    cur.execute("TRUNCATE TABLE raw.yolo_detections;")
+    
+    query = """
+        INSERT INTO raw.yolo_detections (message_id, channel_name, detected_objects, confidence_score, image_category, image_path)
+        VALUES %s
+    """
+    values = [tuple(x) for x in df.to_numpy()]
+    execute_values(cur, query, values)
+    
+    conn.commit()
+    cur.close()
+    conn.close()
+    print("YOLO CSV values successfully uploaded to PostgreSQL landing zone!")
 
 if __name__ == "__main__":
-    main()
+    #main()
+    load_yolo_csv_to_postgres()
