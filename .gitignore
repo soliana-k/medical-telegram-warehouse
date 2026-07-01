@@ -8,3 +8,5 @@ venv/
 *.session
 *.pt
 *.pyc
+.tmp_dagster_home_5y0p9san/
+__pycache__/

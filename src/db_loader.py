@@ -117,5 +117,5 @@ def load_yolo_csv_to_postgres():
     print("YOLO CSV values successfully uploaded to PostgreSQL landing zone!")
 
 if __name__ == "__main__":
-    #main()
+    main()
     load_yolo_csv_to_postgres()
